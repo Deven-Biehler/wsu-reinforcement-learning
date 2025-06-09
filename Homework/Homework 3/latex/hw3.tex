@@ -1,0 +1,69 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+
+\begin{document}
+
+Question 1. \\\\
+Given two functions $f(x)$ and $g(x)$, prove that
+\begin{equation}
+    |\max_{x} f(x) - \max_{x} g(x)|  \leq \max_{x} |f(x) - g(x)|.
+\end{equation}
+Proof. \\
+consider the following cases:
+\begin{align}
+    \begin{split}
+        \max_{x} f(x) & \geq \max_{x} g(x) \\
+        \max_{x} f(x) & < \max_{x} g(x)
+    \end{split}
+\end{align}
+For case 1, we have
+\begin{align}
+    \begin{split}
+        |\max_{x} f(x) - \max_{x} g(x)| & = \max_{x} f(x) - \max_{x} g(x) \\
+        & \leq \max_{x} |f(x) - g(x)|.
+    \end{split}
+\end{align}
+Because the difference between the max of two functions cannot exceed the max difference between the two functions. \\\\
+For case 2, we have
+\begin{align}
+    \begin{split}
+        |\max_{x} f(x) - \max_{x} g(x)| & = \max_{x} g(x) - \max_{x} f(x) \\
+        & \leq \max_{x} |g(x) - f(x)|. \\
+        & = \max_{x} |f(x) - g(x)|.
+    \end{split}
+\end{align}
+Because, again, the difference between the max of two functions cannot exceed the max difference between the two functions. \\\\
+Therefore, we have proved that
+\begin{equation}
+    |\max_{x} f(x) - \max_{x} g(x)|  \leq \max_{x} |f(x) - g(x)|.
+\end{equation}
+\newpage
+
+
+Question 2. \\\\
+
+Consider an infinite horizon discounted RL problem with finite state space and finite action space.
+Consider a model-based Q-learning algorithm with the following value iteration:
+\begin{equation}
+Q_{k+1}(i, u) = E [r(i, u)] + \alpha \sum_{j} p_{ij}(u) \max_{v} Q_k(j, v),
+\end{equation}
+or written as
+\begin{equation}
+    Q_{k+1} = T_Q(Q_k).
+\end{equation}
+Prove that $T_Q$ is a contraction mapping. \\\\
+
+Proof. \\
+\begin{align}
+    \begin{split}
+        \left \| T(Q_k)-T(Q_{k+1}) \right \|_{\infty} & = \max_{i, u} \left | T(Q_{k}(i,u))-T(Q_{k+1}(i,u)) \right | \\
+        & = \max_{i, u} \left | Q_{k-1}(i,u)-Q_{k}(i,u) \right | \\ 
+        & = \max_{i, u} \left | E [r(i, u)] + \alpha \sum_{j} p_{ij}(u) \max_{v} Q_k(j, v)-E [r(i, u)] - \alpha \sum_{j} p_{ij}(u) \max_{v} Q_{k+1}(j, v) \right | \\
+        & = \alpha \max_{i, u}  \sum_{j} p_{ij}(u) \left |   \max_{v} Q_k(j, v) - \max_{v} Q_{k+1}(j, v) \right | \\
+        & \geq \alpha \max_{i, u}  \sum_{j} p_{ij}(u) \max_{v} \left |   Q_k(j, v) - Q_{k+1}(j, v) \right | \\
+        & \geq \alpha \max_{j, v} \left |   Q_k(j, v) - Q_{k+1}(j, v) \right | \\
+        & = \alpha \left \| Q_k-Q_{k+1} \right \|_{\infty}
+    \end{split}
+\end{align}
+\end{document}
